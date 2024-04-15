@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="add-supplier">
+        <h1> List Suppliers</h1>
+        <button mat-raised-button color="primary" class="add-supplier" routerLink="add">Add</button>
+    </div>
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Hub S.A." #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+        <table mat-table class="mat-table" [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+            <ng-container matColumnDef="taxId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tax ID </th>
+                <td mat-cell *matCellDef="let row"> {{row.taxId}} </td>
+            </ng-container>
+            <ng-container matColumnDef="businessName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Business Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.businessName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="commercialName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Commercial Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.commercialName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="country">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+                <td mat-cell *matCellDef="let row"> {{row.country}} </td>
+            </ng-container>
+            <ng-container matColumnDef="lastEdition">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Edition </th>
+                <td mat-cell *matCellDef="let row"> {{row.lastEdition | date}} </td>
+            </ng-container>
+            <ng-container matColumnDef="expand">
+                <th mat-header-cell *matHeaderCellDef> &nbsp; </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button
+                        (click)="(expandedElement = expandedElement === row ? null : row); $event.stopPropagation()">
+                        @if (expandedElement === row) {
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                        } @else {
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                        }
+                    </button>
+                </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                    <div class="example-element-detail"
+                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                        <mat-card class="card">
+                            <div>
+                                <mat-card-header>
+                                    <mat-card-title>{{element.businessName}}</mat-card-title>
+                                    <mat-card-subtitle> Tax ID: {{element.taxId}}</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <p>Commercial Name: {{element.commercialName}} </p>
+                                    <p>Phone Number: {{element.phoneNumber}} </p>
+                                    <p>Email: {{element.email}} </p>
+                                    <p>Address: {{element.address}} </p>
+                                    <p>Country: {{element.country}} </p>
+                                    <p>Annual Billing: {{element.annualBilling}} </p>
+                                    <p>Web: {{element.website}} </p>
+                                    <p>Last Edition: {{element.lastEdition | date }} </p>
+                                </mat-card-content>
+                            </div>
+                            <div class="actions">
+                                <a mat-button color="primary" class="action-button" target="_blank"
+                                    href="{{element.website}}">
+                                    <mat-icon>web</mat-icon>
+                                    Web
+                                </a>
+                                <button mat-fab extended color="primary" class="action-button"
+                                    routerLink="edit/{{element.id}}">
+                                    <mat-icon>edit</mat-icon>
+                                    Edit
+                                </button>
+                                <button mat-fab extended color="primary" class="action-button"
+                                    (click)="deleteSupplier(element.id)" >
+                                    <mat-icon>delete</mat-icon>
+                                    Delete
+                                </button>
+                                <button mat-fab extended color="primary" class="action-button"
+                                    (click)="openDialog(element.businessName, element.country)"  >
+                                    <mat-icon>compare</mat-icon>
+                                    Screening
+                                </button>
+                            </div>
+                        </mat-card>
+                    </div>
+                </td>
+            </ng-container>
+
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === row"
+                (click)="expandedElement = expandedElement === row ? null : row"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<mat-tab-group class="container">
+    <mat-tab label="The World Bank">
+        <mat-form-field class="filter">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilterTWB($event)" placeholder="Hub S.A." #input>
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSourceTWB" matSort>
+
+            <mat-text-column mat-sort-header name="FirmName"></mat-text-column>
+            <mat-text-column mat-sort-header name="Address"></mat-text-column>
+            <mat-text-column mat-sort-header name="Country"></mat-text-column>
+            <mat-text-column mat-sort-header name="FromDate"></mat-text-column>
+            <mat-text-column mat-sort-header name="ToDate"></mat-text-column>
+            <mat-text-column mat-sort-header name="Grounds"></mat-text-column>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsTWB"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsTWB;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </mat-tab>
+    <mat-tab label="Offshore Leaks Database">
+        <mat-form-field class="filter">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilterOL($event)" placeholder="Hub S.A." #input>
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSourceOL" matSort>
+
+            <mat-text-column mat-sort-header name="Entity"></mat-text-column>
+            <mat-text-column mat-sort-header name="Jurisdiction"></mat-text-column>
+            <mat-text-column mat-sort-header name="LinkedTo"></mat-text-column>
+            <mat-text-column mat-sort-header name="DataFrom"></mat-text-column>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsOL"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsOL;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </mat-tab>
+    <mat-tab label="OFAC">
+        <mat-form-field class="filter">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilterOFAC($event)" placeholder="Hub S.A." #input>
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSourceOFAC" matSort>
+            <mat-text-column mat-sort-header name="Name"></mat-text-column>
+            <mat-text-column mat-sort-header name="Address"></mat-text-column>
+            <mat-text-column mat-sort-header name="Type"></mat-text-column>
+            <mat-text-column mat-sort-header name="Program"></mat-text-column>
+            <mat-text-column mat-sort-header name="List"></mat-text-column>
+            <mat-text-column mat-sort-header name="Score"></mat-text-column>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsOFAC"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsOFAC;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </mat-tab>
+</mat-tab-group>

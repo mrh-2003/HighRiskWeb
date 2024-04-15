@@ -1,0 +1,92 @@
+.container {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+}
+h1{
+    font-weight: 500;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-table {
+    overflow-x: auto;
+    display: block;
+}
+
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td,
+th {
+    width: 25%;
+}
+
+tr.example-detail-row {
+    height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+}
+
+.example-element-row td {
+    border-bottom-width: 0;
+}
+
+.example-element-detail {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    padding: 20px;
+    width: 50%;
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+}
+
+.action-button {
+    width: 150px;
+    margin: 10px auto;
+}
+@media screen and (max-width: 1000px) {
+    .card {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .card {
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .action-button {
+        margin: 10px;
+    }
+
+}
+.add-supplier{
+    justify-content: end;
+}
+.add-supplier{
+    display: flex;
+    justify-content: space-between;
+}

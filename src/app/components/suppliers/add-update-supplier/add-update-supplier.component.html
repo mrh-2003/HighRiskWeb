@@ -1,0 +1,119 @@
+<h1>{{text}} Supplier</h1>
+<form class="form-add-edit" [formGroup]="form">
+    <mat-form-field class="full-width">
+        <mat-label>Business Name</mat-label>
+        <input matInput formControlName="businessName" placeholder="Hub S.A." type="text">
+        @if (form.get('businessName')!.hasError('required')) {
+        <mat-error>
+            Business Name is <strong>required</strong>
+        </mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Commercial Name</mat-label>
+        <input matInput formControlName="commercialName" placeholder="Hub" type="text">
+        @if (form.get('commercialName')!.hasError('required')) {
+        <mat-error>
+            Commercial Name is <strong>required</strong>
+        </mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Tax ID</mat-label>
+        <input matInput formControlName="taxId" placeholder="15232154895" minlength="11" maxlength="11">
+        @if (form.get('taxId')!.hasError('required')) {
+        <mat-error>
+            Tax ID is <strong>required</strong>
+        </mat-error>
+        }
+        @if(form.get('taxId')!.hasError('minlength') || form.get('taxId')!.hasError('maxlength')){
+        <mat-error>
+            Tax ID must have 11 digits
+        </mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNumber" placeholder="987654321" type="number">
+        @if (form.get('phoneNumber')!.hasError('required')) {
+        <mat-error>
+            Phone Number is <strong>required</strong>
+        </mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="example@ey.pe" type="email">
+        @if (form.get('email')!.hasError('required')) {
+        <mat-error>
+            Email is <strong>required</strong>
+        </mat-error>
+        }
+        @if(form.get('email')!.hasError('email')){
+        <mat-error>
+            Please enter a valid email address
+        </mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Website</mat-label>
+        <input matInput formControlName="website" placeholder="https://www.ey.pe" type="url">
+        @if (form.get('website')!.hasError('required')) {
+        <mat-error>
+            Website is <strong>required</strong>
+        </mat-error>
+        }
+        @if(form.get('website')!.hasError('pattern')){
+        <mat-error>
+            Please enter a valid website URL
+        </mat-error>
+        }
+
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" placeholder="Av. Javier Prado 123" type="text">
+        @if (form.get('address')!.hasError('required')) {
+        <mat-error>
+            Address is <strong>required</strong>
+        </mat-error>
+        }
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>Country</mat-label>
+        <input type="text" placeholder="Peru" matInput [formControl]="myControl"
+            [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            @for (option of filteredOptions | async; track option) {
+            <mat-option [value]="option">{{option}}</mat-option>
+            }
+        </mat-autocomplete>
+        @if (myControl.hasError('required')) {
+        <mat-error>
+            Country is <strong>required</strong>
+        </mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Annual Billing</mat-label>
+        <input matInput formControlName="annualBilling" placeholder="1000000" type="number" min="0">
+        @if (form.get('annualBilling')!.hasError('required')) {
+        <mat-error>
+            Annual Billing is <strong>required</strong>
+        </mat-error>
+        }
+        @if (form.get('annualBilling')!.hasError('min')) {
+        <mat-error>
+            Annual Billing must be greater than 0
+        </mat-error>
+        }
+    </mat-form-field>
+    <button mat-flat-button [disabled]="form.invalid" (click)="onSubmit()" color="primary">{{text}}</button>
+</form>
